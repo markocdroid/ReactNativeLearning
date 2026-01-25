@@ -21,7 +21,7 @@ export default function App() {
             <View style={styles.searchContainer}>
                 <TextInput
                     style={styles.textInput}
-                    placeholder="Search for flowers1..."
+                    placeholder="Search for flowers..."
                 />
             </View>
 
@@ -83,6 +83,122 @@ export default function App() {
                 </View>
             </View>
 
+            {/* Mother's day special */}
+            <View>
+                <View style={styles.featuredSection}>
+                    <Text style={styles.sectionTitle}>Mother's Day Special</Text>
+                    <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                        <View style={styles.flowerCard}>
+                            <Image
+                                source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/3/3b/W_carnation4051.jpg' }}
+                                style={styles.flowerImage}
+                            />
+                            <Text style={styles.flowerTitle}>Carnation </Text>
+                        </View>
+                        <View style={styles.flowerCard}>
+                            <Image
+                                source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/0/00/Bouquet_de_roses_roses.jpg' }}
+                                style={styles.flowerImage}
+                            />
+                            <Text style={styles.flowerTitle}>Pink Rose</Text>
+                        </View>
+
+                        <View style={styles.flowerCard}>
+                            <Image
+                                source={{ uri: 'https://images.unsplash.com/photo-1487435636644-3ad040f0195b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' }}
+                                style={styles.flowerImage}
+                            />
+                            <Text style={styles.flowerTitle}>Tulip</Text>
+                        </View>
+                        <View style={styles.flowerCard}>
+                            <Image
+                                source={{ uri: 'https://images.unsplash.com/photo-1579847621515-b40fcc20831e?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' }}
+                                style={styles.flowerImage}
+                            />
+                            <Text style={styles.flowerTitle}>Lily</Text>
+                        </View>
+                        <View style={styles.flowerCard}>
+                            <Image
+                                source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/4/40/Sunflower_sky_backdrop.jpg' }}
+                                style={styles.flowerImage}
+                            />
+                            <Text style={styles.flowerTitle}>Sunflower</Text>
+                        </View>
+                        <View style={styles.flowerCard}>
+                            <Image
+                                source={{ uri: 'https://images.unsplash.com/photo-1556216750-2108e1e54e9a?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' }}
+                                style={styles.flowerImage}
+                            />
+                            <Text style={styles.flowerTitle}>Orchid</Text>
+                        </View>
+                    </ScrollView>
+                </View>
+
+                {/* Button Section */}
+                <View style={styles.buttonContainer}>
+                    <TouchableOpacity style={styles.button} onPress={() => alert('Shop Now')}>
+                        <Text style={styles.buttonText}>Shop Now</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+
+            {/*Anniversary Celebrations */}
+            <View>
+                <View style={styles.featuredSection}>
+                    <Text style={styles.sectionTitle}>Anniversary Celebrations</Text>
+                    <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                        <View style={styles.flowerCard}>
+                            <Image
+                                source={{ uri: 'https://images.unsplash.com/photo-1581264692636-3cf6f29655c2?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' }}
+                                style={styles.flowerImage}
+                            />
+                            <Text style={styles.flowerTitle}>Red Rose</Text>
+                        </View>
+                        <View style={styles.flowerCard}>
+                            <Image
+                                source={{ uri: 'https://images.unsplash.com/photo-1579847621515-b40fcc20831e?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' }}
+                                style={styles.flowerImage}
+                            />
+                            <Text style={styles.flowerTitle}>Lily</Text>
+                        </View>
+                        <View style={styles.flowerCard}>
+                            <Image
+                                source={{ uri: 'https://images.unsplash.com/photo-1487435636644-3ad040f0195b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' }}
+                                style={styles.flowerImage}
+                            />
+                            <Text style={styles.flowerTitle}>Tulip</Text>
+                        </View>
+                        <View style={styles.flowerCard}>
+                            <Image
+                                source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/f/fd/PaeoniaSuffruticosa7.jpg' }}
+                                style={styles.flowerImage}
+                            />
+                            <Text style={styles.flowerTitle}>Peony</Text>
+                        </View>
+                        <View style={styles.flowerCard}>
+                            <Image
+                                source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/3/3b/W_carnation4051.jpg' }}
+                                style={styles.flowerImage}
+                            />
+                            <Text style={styles.flowerTitle}>Carnation</Text>
+                        </View>
+                        <View style={styles.flowerCard}>
+                            <Image
+                                source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/e/e0/Cosmos_bipinnatus%2C_a_wild_Cosmos_%289461227273%29.jpg' }}
+                                style={styles.flowerImage}
+                            />
+                            <Text style={styles.flowerTitle}>Cosmos</Text>
+                        </View>
+                    </ScrollView>
+                </View>
+
+                {/* Button Section */}
+                <View style={styles.buttonContainer}>
+                    <TouchableOpacity style={styles.button} onPress={() => alert('Shop Now')}>
+                        <Text style={styles.buttonText}>Shop Now</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
 
         </ScrollView>
     );
