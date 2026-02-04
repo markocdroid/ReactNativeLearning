@@ -21,12 +21,12 @@ export default function BakeryScreen() {
             {bakery.map((item, index) => (
                 <View key={index} style={styles.itemContainer} >
 
-                    <Image source={{ uri: item.image }} style={styles.image} />
+                    <Image source={{ uri: item.image}} style={styles.image} />
 
                     <View style={styles.details}>
                         <Text style={styles.name}>{item.name}</Text>
                         <Text style={styles.price}>{item.price}</Text>
-                        <TouchableOpacity style={styles.button} onPress={() => alert(`${vegetable.name} added to cart`)}>
+                        <TouchableOpacity style={styles.button} onPress={() => alert(`${item.name} added to cart`)}>
                             <Text style={styles.buttonText}>Add To Cart</Text>
                         </TouchableOpacity>
                     </View>

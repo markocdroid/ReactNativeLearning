@@ -17,7 +17,7 @@ export default function DairyScreen() {
     ];
 
     return (
-        <ScrollView contentContainerStyle={styles.container}>
+        <ScrollView style={styles.container}>
             <Text style={styles.title}>Fresh dairy products for you from folders</Text>
 
             {items.map((item, index) => (
