@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ImageBackground } from 'react-native';
-import { OPEN_WEATHER_API_KEY } from '.env';
+import { OPEN_WEATHER_API_KEY } from '@env';
 
 
 const TimeZoneStatus = () => {
@@ -15,7 +15,7 @@ const TimeZoneStatus = () => {
   useEffect(() => {
     const updateTimes = () => {
       setTimes({
-        India: getTime('Asia/Kolkata'),
+        Belgrade: getTime('Europe/Belgrade'),
         Paris: getTime('Europe/Paris'),
         NewYork: getTime('America/New_York'),
         London: getTime('Europe/London'),
@@ -49,13 +49,14 @@ const TimeZoneStatus = () => {
 
   useEffect(() => {
     const fetchWeatherData = async () => {
-      const cities = ['Kolkata', 'Paris', 'New York', 'London', 'Tokyo', 'Sydney'];
+      const cities = ['Belgrade', 'Paris', 'New York', 'London', 'Tokyo', 'Sydney'];
       const weatherUpdates = await Promise.all(
         cities.map(async (city) => {
           const temp = await getWeather(city);
           return { city, temp };
         })
       );
+      
       setWeatherData(
         weatherUpdates.reduce((acc, { city, temp }) => {
           acc[city] = temp;
@@ -93,14 +94,14 @@ const TimeZoneStatus = () => {
     >
       <View style={styles.overlay} />
       <Text style={styles.heading}>Planet Pulse: Time & Weather</Text>
-      <TimeBox city="India" time={indiaTime} weather={weatherData['Kolkata']} style={styles.clock1} />
-      <TimeBox city="Paris" time={parisTime} weather={weatherData['Paris']} style={styles.clock2} />
-      <TimeBox city="New York" time={newYorkTime} weather={weatherData['New York']} style={styles.clock3} />
-      <TimeBox city="London" time={londonTime} weather={weatherData['London']} style={styles.clock4} />
-      <TimeBox city="Tokyo" time={tokyoTime} weather={weatherData['Tokyo']} style={styles.clock5} />
-      <TimeBox city="Sydney" time={sydneyTime} weather={weatherData['Sydney']} style={styles.clock6} />
-      <View style={styles.container}>
 
+      <View style={styles.container} testID='timeBoxContainer'>
+        <TimeBox city="Belgrade" time={times.Belgrade} weather={weatherData['Belgrade']} style={styles.clock1} />
+        <TimeBox city="Paris" time={times.Paris} weather={weatherData['Paris']} style={styles.clock2} />
+        <TimeBox city="New York" time={times.NewYork} weather={weatherData['New York']} style={styles.clock3} />
+        <TimeBox city="London" time={times.London} weather={weatherData['London']} style={styles.clock4} />
+        <TimeBox city="Tokyo" time={times.Tokyo} weather={weatherData['Tokyo']} style={styles.clock5} />
+        <TimeBox city="Sydney" time={times.Sydney} weather={weatherData['Sydney']} style={styles.clock6} />
       </View>
     </ImageBackground>
   );
