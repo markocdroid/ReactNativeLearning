@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ImageBackground } from 'react-native';
+import { OPEN_WEATHER_API_KEY } from '.env';
 
 
 const TimeZoneStatus = () => {
@@ -29,7 +30,7 @@ const TimeZoneStatus = () => {
   // Function to get weather data for a city with error handling
   const getWeather = async (city) => {
     try {
-      const apiKey = 'API_KEY'; // Replace with your API key
+      const apiKey = OPEN_WEATHER_API_KEY;
       const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
       const response = await fetch(url);
       const data = await response.json();
