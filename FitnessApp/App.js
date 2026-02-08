@@ -3,15 +3,18 @@ import { SafeAreaView, StyleSheet } from 'react-native';
 import FitnessWorld from './FitnessWorld'
 
 export default function App() {
-  return (
-    <SafeAreaView style={styles.container}>
-     <FitnessWorld/> 
-    </SafeAreaView>
-  );
+    return (
+        <SafeAreaView style={styles.container}>
+            <FitnessWorld />
+        </SafeAreaView>
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'black',
+    },
 });
