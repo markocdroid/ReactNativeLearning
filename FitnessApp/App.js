@@ -10,17 +10,14 @@ export default function App() {
   );
 }
 
-let _paddingBottom = 0;
-
-if (Platform.OS === 'android') {
-  _paddingBottom = 50;
-}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 25, //Clearing notch
-    paddingBottom: _paddingBottom, //clearing nav for Android.
+    ...Platform.select({
+      ios: { paddingBottom: 0, }, //iOS handles safe area insets automatically.
+      android: { paddingBottom: 50 } //Android needs manual padding to clear navigation bar.
+    }),
     flexDirection: 'vertical',
     backgroundColor: 'black',
   },
