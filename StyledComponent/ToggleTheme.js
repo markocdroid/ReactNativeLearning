@@ -19,9 +19,9 @@ const ToggleTheme = () => {
 
             <Container>
                 <ScrollView contentContainerStyle={{ paddingBottom: 20 }}>
-                    
+
                     {/* Add marginTop to avoid first heading being cut off */}
-                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 20 }}> 
+                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 20 }}>
                         <StyledText>Pet Care Guide</StyledText>
                     </View>
 
@@ -50,6 +50,7 @@ const ToggleTheme = () => {
                 </StyledButton>
 
             </Container>
+
         </ThemeProvider>
 
 
@@ -69,6 +70,9 @@ const StyledText = styled.Text`
   font-style:italic;
   font-weight: bold;
   color: ${(props) => props.theme.colors.text};
+  background-color:${(props) => props.theme.colors.petTitleBackground};
+  padding: 20px 40px 20px 40px;
+  border-radius: 5px;
 `;
 
 const ContentSection = styled.View`
@@ -107,6 +111,7 @@ const lightTheme = {
         buttonBackground: '#000000',
         buttonText: '#ffffff',
         text: '#000000',
+        petTitleBackground: '#cf96e0',
     },
 };
 
@@ -116,8 +121,11 @@ const darkTheme = {
         buttonBackground: '#FF6347',
         buttonText: '#282828',
         text: '#FFD700',
+        petTitleBackground: '#2c5c6e',
     },
 };
+
+
 
 
 export default ToggleTheme;
