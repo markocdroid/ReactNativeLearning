@@ -6,7 +6,14 @@ function ProfileScreen() {
 
     const { user, logout } = useContext(AuthContext);
     if (!user) {
-        return <Text>Please log in.</Text>;
+        return (
+            <View style={styles.container}>
+                <View style={styles.text}>
+                    <Text>Please log in.</Text>
+                </View>
+            </View>
+        );
+
     }
 
     return (
@@ -24,6 +31,9 @@ function ProfileScreen() {
 const styles = StyleSheet.create({
     container: {
         padding: 20,
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     text: {
         fontWeight: 'bold',

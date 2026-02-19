@@ -1,5 +1,4 @@
 import React, { createContext, useState } from 'react';
-import { View } from 'react-native';
 
 // Create a Context for authentication
 export const AuthContext = createContext();

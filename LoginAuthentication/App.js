@@ -6,22 +6,24 @@ import HomeScreen from './components/HomeScreen';
 import LoginScreen from './components/LoginScreen';
 import ProfileScreen from './components/ProfileScreen';
 import ProtectedScreen from './components/ProtectedScreen';
+import UserOnly from './components/UserOnly';
 
 const Drawer = createDrawerNavigator();
 
 function App() {
-  return (
-    <AuthProvider>
-      <NavigationContainer>
-        <Drawer.Navigator initialRouteName="Home">
-          <Drawer.Screen name="Home" component={HomeScreen} />
-          <Drawer.Screen name="Login" component={LoginScreen} />
-          <Drawer.Screen name="Profile" component={ProfileScreen} />
-          <Drawer.Screen name="Protected" component={ProtectedScreen} />
-        </Drawer.Navigator>
-      </NavigationContainer>
-    </AuthProvider>
-  );
+    return (
+        <AuthProvider>
+            <NavigationContainer>
+                <Drawer.Navigator initialRouteName="Home">
+                    <Drawer.Screen name="Home" component={HomeScreen} />
+                    <Drawer.Screen name="Login" component={LoginScreen} />
+                    <Drawer.Screen name="Profile" component={ProfileScreen} />
+                    <Drawer.Screen name="Protected" component={ProtectedScreen} />
+                    <Drawer.Screen name='User' component={UserOnly} />
+                </Drawer.Navigator>
+            </NavigationContainer>
+        </AuthProvider>
+    );
 }
 
 export default App;

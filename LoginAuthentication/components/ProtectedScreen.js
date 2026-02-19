@@ -6,7 +6,11 @@ function ProtectedScreen() {
 
     const { user } = useContext(AuthContext);
     if (!user) {
-        return <Text>Please log in to access this screen.</Text>;
+        return (
+            <View style={styles.container}>
+                <Text>Please log in to access this screen.</Text>;
+            </View>
+        );
     }
     if (user.role === 'admin') {
         return (
@@ -16,9 +20,11 @@ function ProtectedScreen() {
         );
     }
     return (
-        <Text testID='accessDeniedMessage'>Access Denied. Only admins can view this screen.</Text>
+        <View style={styles.container}>
+            <Text testID='accessDeniedMessage'>Access Denied. Only admins can view this screen.</Text>
+        </View>
+    );
 
-    )
 }
 
 const styles = StyleSheet.create({
