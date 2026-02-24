@@ -5,21 +5,31 @@ import RegistrationForm from './RegistrationForm';
 import Confirmation from './Confirmation';
 
 const App = () => {
+    const [registrationDetails, setRegistrationDetails] = useState(null);
 
-
-  return (
-    <SafeAreaView style={styles.container}>
-      <RegistrationForm/>
-    </SafeAreaView>
-  );
+    const handleConfirm = (details) => {
+        setRegistrationDetails(details);
+    };
+    const handleBack = () => {
+        setRegistrationDetails(null);
+    };
+    return (
+        <SafeAreaView style={styles.container}>
+            {registrationDetails ? (
+                <Confirmation details={registrationDetails} onBack={handleBack} />
+            ) : (
+                <RegistrationForm onConfirm={handleConfirm} />
+            )}
+        </SafeAreaView>
+    );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 16,
-  },
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        padding: 16,
+    },
 });
 
 export default App;
