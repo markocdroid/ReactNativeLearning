@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, Button, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, ScrollView, CheckBox } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
@@ -21,6 +21,12 @@ const validationSchema = Yup.object({
     confirmPassword: Yup.string()
         .oneOf([Yup.ref('password'), null], 'Passwords must match')
         .required('Confirm Password is required'),
+    address: Yup.string()
+        .required('Address is required'),
+    termsAccepted: Yup.boolean()
+        .oneOf([true], 'You must accept the terms and conditions')
+        .required('You must accept the terms and conditions')
+
 });
 
 const FormExample = () => {
@@ -34,6 +40,8 @@ const FormExample = () => {
                     phone: '',
                     password: '',
                     confirmPassword: '',
+                    address: '',
+                    termsAccepted: false,
                 }}
                 validationSchema={validationSchema}
                 onSubmit={(values) => {
@@ -41,8 +49,9 @@ const FormExample = () => {
                 }}
             >
 
-                {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
+                {({ handleChange, handleBlur, handleSubmit, values, errors, touched, setFieldValue }) => (
                     <ScrollView contentContainerStyle={styles.container}>
+
                         <View testID='formName'>
                             <Text style={styles.label}>Name</Text>
                             <TextInput style={styles.input} onChangeText={handleChange('name')} onBlur={handleBlur('name')} value={values.name} />
@@ -100,7 +109,34 @@ const FormExample = () => {
                             )}
                         </View>
 
-                        <Button onPress={handleSubmit} title="Submit" color="#007BFF" />
+                        <View testID='formAddress'>
+                            <Text style={styles.label}>Address </Text>
+                            <TextInput
+                                style={styles.input}
+                                onChangeText={handleChange('address')}
+                                onBlur={handleBlur('address')}
+                                value={values.address}
+                            />
+                            {touched.address && errors.address && (
+                                <Text style={styles.error}>{errors.address}</Text>
+                            )}
+                        </View>
+
+                        <View testID='formTerms' style={styles.checkboxContainer}>
+                            <CheckBox
+                                value={values.termsAccepted} // Binds the UI state to Formik's value
+                                onValueChange={(value) => setFieldValue('termsAccepted', value)}
+                                onBlur={handleBlur('termsAccepted')}
+                            />
+
+                            <Text style={styles.labelSmall}>I agree to the terms and conditions</Text>
+
+                            {touched.termsAccepted && errors.termsAccepted && (
+                                <Text style={styles.error}>{errors.termsAccepted}</Text>
+                            )}
+                        </View>
+
+                        <Button onPress={handleSubmit} style={styles.button} title="Submit" />
 
                     </ScrollView>
                 )}
@@ -132,6 +168,12 @@ const styles = StyleSheet.create({
         color: '#333',
         marginBottom: 5,
     },
+    labelSmall: {
+        fontSize: 12,
+        fontWeight: '100',
+        color: '#333',
+        marginBottom: 5,
+    },
     input: {
         borderWidth: 1,
         borderColor: '#ccc',
@@ -139,6 +181,15 @@ const styles = StyleSheet.create({
         marginBottom: 15,
         borderRadius: 8,
         backgroundColor: '#fff',
+    },
+    button: {
+        margin: 10,
+        padding: 5,
+        color: '#007BFF',
+    },
+    checkboxContainer: {
+        marginVertical: 10,
+        paddingBottom: 10,
     },
     error: {
         color: '#d9534f',
