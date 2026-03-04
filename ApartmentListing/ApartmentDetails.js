@@ -1,22 +1,44 @@
 // ApartmentDetails.js
 import React, { useState } from 'react';
-import { ScrollView, View,ImageBackground , Text, Image, Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
+import { FlatList } from 'react-native';
+import { ScrollView, View, ImageBackground, Text, Image, Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; // Ensure you have react-native-vector-icons or expo for icons
 
 
 const CustomCarousel = ({ images }) => {
- 
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const goNext = () => {
+    if (currentIndex < images.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+    }
+  };
+  const goPrev = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    }
+  };
 
   return (
     <View style={styles.carouselWrapper}>
       {/* Left Arrow */}
-    
+      <TouchableOpacity onPress={goPrev} style={styles.arrowLeft}>
+        <Ionicons name="arrow-back" size={24} color="white" />
+      </TouchableOpacity>
 
       {/* Image Carousel */}
-     
+      <ScrollView
+        horizontal
+        style={styles.carouselContainer}
+      >
+        <Image key={currentIndex} source={{ uri: images[currentIndex] }} style={styles.carouselImage} />
+      </ScrollView>
 
       {/* Right Arrow */}
-      
+      <TouchableOpacity onPress={goNext} style={styles.arrowRight}>
+        <Ionicons name="arrow-forward" size={24} color="white" />
+      </TouchableOpacity>
+
     </View>
   );
 };
@@ -24,17 +46,38 @@ const CustomCarousel = ({ images }) => {
 const ApartmentDetails = ({ data }) => {
   return (
     <ImageBackground
-    source={{ uri: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' }} // Background image link
-    style={styles.background}
-    imageStyle={{ opacity: 0.5 }} // Increase opacity for better visibility
-  >
+      source={{ uri: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' }} // Background image link
+      style={styles.background}
+      imageStyle={{ opacity: 0.5 }} // Increase opacity for better visibility
+    >
 
-    <View style={styles.main}>
-      <Text style={styles.header}>Luxury Apartments~Dreams begin here</Text>
-      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-    
-      </ScrollView>
-    </View>
+      <View style={styles.main}>
+        <Text style={styles.header}>Luxury Apartments~Dreams begin here</Text>
+
+        <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+          <FlatList
+            data={data}
+            keyExtractor={item => item.id.toString()}
+            renderItem={({ item }) => (
+              <View style={styles.card}>
+                <Text style={styles.title}>{item.title}</Text>
+                <Text style={styles.price}>{item.price}</Text>
+                <Text style={styles.location}>{item.location}</Text>
+                <Text style={styles.description}>{item.description}</Text>
+                <Text style={styles.details}>
+                  {item.bedrooms} Beds • {item.bathrooms} Baths
+                </Text>
+                <View testID="imageDisplay" style={styles.imageDisplay}>
+                  <CustomCarousel images={item.images} />
+                </View>
+              </View>
+            )}
+            showsVerticalScrollIndicator={false}
+          />
+        </ScrollView>
+
+      </View>
+
     </ImageBackground>
   );
 };
@@ -42,11 +85,11 @@ const ApartmentDetails = ({ data }) => {
 export default ApartmentDetails;
 
 const styles = StyleSheet.create({
-    background: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      },
+  background: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   main: {
     flex: 1,
     alignItems: 'center',
@@ -58,7 +101,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     paddingHorizontal: 10,
-    width:600
+    width: 600
   },
   header: {
     fontSize: 24,
@@ -130,7 +173,7 @@ const styles = StyleSheet.create({
   },
   arrowLeft: {
     position: 'absolute',
-    left:  -48,
+    left: -48,
     zIndex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     padding: 10,
