@@ -12,20 +12,22 @@ const App = () => {
   }, []);
 
   const [inputValue, setInputValue] = useState('');
+  const [secondInputValue, setSecondInputValue] = useState('');
   const [storedValue, setStoredValue] = useState('');
 
-  const storeData = async (value) => {
+  const storeData = async (key, value1, value2) => {
     try {
-      await AsyncStorage.setItem('@storage_Key', value);
+      const combinedValue = `${value1}, ${value2}`;
+      await AsyncStorage.setItem(key, combinedValue);
       console.log('Data stored successfully');
     } catch (e) {
       console.error('Failed to save data', e);
     }
   };
 
-  const getData = async () => {
+  const getData = async (key) => {
     try {
-      const value = await AsyncStorage.getItem('@storage_Key');
+      const value = await AsyncStorage.getItem(key);
       if (value !== null) {
         setStoredValue(value);
         console.log('Data retrieved successfully');
@@ -35,9 +37,9 @@ const App = () => {
     }
   };
 
-  const clearData = async () => {
+  const clearData = async (key) => {
     try {
-      await AsyncStorage.removeItem('@storage_Key');
+      await AsyncStorage.removeItem(key);
       setStoredValue('');
       console.log('Data cleared successfully');
     } catch (e) {
@@ -55,10 +57,18 @@ const App = () => {
         value={inputValue}
         onChangeText={setInputValue}
       />
+
+      <TextInput
+        style={styles.input}
+        placeholder="Enter something..."
+        value={secondInputValue}
+        onChangeText={setSecondInputValue}
+      />
+
       <View style={styles.spacer} >
-        <Button title="Store Data" onPress={() => storeData(inputValue)} testID='storeData' />
-        <Button title="Retrieve Data" onPress={() => getData()} testID='retrieveData' />
-        <Button title="Clear Data" onPress={() => clearData()} testID='clearData' />
+        <Button title="Store Data" onPress={() => storeData('@storage_Key', inputValue, secondInputValue)} testID='storeData' />
+        <Button title="Retrieve Data" onPress={() => getData('@storage_Key')} testID='retrieveData' />
+        <Button title="Clear Data" onPress={() => clearData('@storage_Key')} testID='clearData' />
       </View>
       <Text style={styles.text} testID='storedId'>Stored Value: {storedValue}</Text>
 
