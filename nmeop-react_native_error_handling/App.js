@@ -1,51 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet, ActivityIndicator } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Pressable, Alert, StyleSheet, Platform } from 'react-native';
 
 const App = () => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState(null);
 
-  // Function to fetch data from API
-  const fetchData = async () => {
+  const clickFirstBtn = () => {
     try {
-      const response = await fetch('https://jsonplaceholder.typicode.com/users'); // API URL
-      if (response.status == 404) {
-        throw Error("Data not found");
-      } else {
-        const json = await response.json(); // Parsing the JSON response
-        setData(json); // Set data in state
-      }
+      throw new Error('This is a generic error');
     } catch (error) {
-      console.error('Error fetching data:', error);
-      setData([{ name: 'No data found' }]); // Set 'No data found' in case of an exception
-    } finally {
-      setLoading(false); // Stop loading when data is fetched
+      const errorMessage = error?.message || 'An unknown error occurred';
+      console.error('Error caught:', error);
+      if (Platform.OS === 'web') {
+        alert(`Error: ${errorMessage}`);
+      } else {
+        Alert.alert(
+          "Error",
+          `An error occurred: ${errorMessage}`,
+          [
+            { text: "Cancel", onPress: () => console.log("Cancel Pressed") },
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+          ],
+          { cancelable: false }
+        );
+      }
     }
   };
 
-  // useEffect to fetch data when component mounts
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Users List</Text>
+      <Text style={styles.title}>Error Example</Text>
 
-      {loading ? (
-        <ActivityIndicator size="large" color="#0000ff" />
-      ) : (
-        <FlatList
-          data={data}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => (
-            <View style={styles.item}>
-              <Text style={styles.name}>{item.name}</Text>
-              {item.email && <Text style={styles.email}>{item.email}</Text>}
-            </View>
-          )}
-        />
-      )}
+      <Pressable style={styles.pressable} onPress={clickFirstBtn} >
+        <Text style={styles.pressText}>Button 1</Text>
+      </Pressable>
+
+      {data && <Text>{data.name}</Text>}
     </View>
   );
 };
@@ -54,28 +44,22 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    paddingTop: 50,
-    paddingHorizontal: 20,
+    alignItems: 'center',
+    padding: 20,
   },
-  heading: {
+  title: {
     fontSize: 24,
     fontWeight: 'bold',
-    textAlign: 'center',
     marginBottom: 20,
   },
-  item: {
-    padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
+  pressable: {
+    marginVertical: 10,
+    backgroundColor: 'blue',
+    padding: '4pt'
   },
-  name: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  email: {
-    fontSize: 14,
-    color: 'gray',
-  },
+  pressText: {
+    color: 'white'
+  }
 });
 
 export default App;
