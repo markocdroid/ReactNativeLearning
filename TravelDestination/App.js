@@ -1,10 +1,11 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import HomeScreen from './HomeScreen';
 import AboutScreen from './AboutScreen';
 import ContactUsScreen from './ContactUsScreen';
 import GalleryScreen from './GalleryScreen';
+import TravelServicesScreen from './TravelServicesScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -16,6 +17,7 @@ export default function App() {
         <Drawer.Screen name="About" component={AboutScreen} />
         <Drawer.Screen name="Contact Us" component={ContactUsScreen} />
         <Drawer.Screen name="Gallery" component={GalleryScreen} />
+        <Drawer.Screen name="Travel Service" component={TravelServicesScreen} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
@@ -26,7 +28,7 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: 'cover',
     justifyContent: 'center',
-     backgroundColor: 'rgba(255, 255, 255, 0.5)'
+    backgroundColor: 'rgba(255, 255, 255, 0.5)'
   },
   container: {
     flex: 1,
@@ -92,24 +94,36 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     margin: 10,
-   flex:'display',
-   alignItems:'center',
-   justifyContent:'center',
-   flexDirection:'column'
+    flex: 'display',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column'
 
   },
-  button:{
-    backgroundColor:'#FDCE96',
-    borderRadius:10,
-    width:90,
-    
+  button: {
+    backgroundColor: '#FDCE96',
+    borderRadius: 10,
+    width: 90,
   },
-  buttonText:{
-    textAlign:'center',
+  buttonText: {
+    textAlign: 'center',
     paddingVertical: 6,
-    paddingHorizontal: 16,   
-     color:'white'
-  }
+    paddingHorizontal: 16,
+    color: 'white'
+  },
+  serviceCard: {
+    backgroundColor: 'rgba(52, 61, 82, 0.7)',
+    borderRadius: 10,
+    padding: 15,
+    marginVertical: 8,
+    width: '80%',
+  },
+  serviceTitle: {
+    fontSize: 18,
+    color: 'white',
+    marginBottom: 5,
+  },
+
 });
 
-export {styles}
+export { styles }
