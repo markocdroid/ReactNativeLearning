@@ -7,6 +7,7 @@ import ContactUsScreen from './ContactUsScreen';
 import GalleryScreen from './GalleryScreen';
 
 const Drawer = createDrawerNavigator();
+
 export default function App() {
   return (
     <NavigationContainer>
